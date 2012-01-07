@@ -1,0 +1,76 @@
+.selected{background: #ffcc00; font-weight: bold;}
+
+.sendit{
+background:#f9f9f9;
+border-radius: 5px;
+padding:10px 5px 10px 5px;
+border:1px solid #efefef;
+}
+.sendit h3, .sendit h4{
+margin:15px 0;
+font-size:1.5em;
+}
+.sendit label{
+float: left;
+width: 120px;
+font-weight: bold;
+}
+
+#sendit_subscribe_button{display:block;margin:5px 0}
+
+.sendit input, .sendit textarea, .sendit select{
+/*width: 180px;*/
+background:#FFFFFF;
+    border: 1px solid #BBBBBB;
+    border-radius: 2px 2px 2px 2px;
+    margin: 0 5px 0 0;
+    padding: 4px;
+
+
+}
+.short{
+width: 100px;
+margin-bottom: 5px;
+}
+
+.sendit textarea{
+width: 250px;
+height: 150px;
+}
+
+.boxes{
+width: 1em;
+}
+
+#submitbutton{
+
+margin-top: 5px;
+width: 180px;
+}
+
+.sendit br{
+clear: left;
+}
+
+.info, .success, .warning, .error, .validation {
+    border: 1px solid;
+    margin: 5px 0px;
+    padding:10px;
+
+}
+.info, .notice{
+    color: #FFD324;
+    background-color: #FFF6BF;
+}
+.success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+}
+.warning {
+    color: #9F6000;
+    background-color: #FEEFB3;
+}
+.error {
+    color: #D8000C;
+    background-color: #FFBABA;
+}
