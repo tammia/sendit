@@ -670,11 +670,11 @@ function gestisci_menu() {
 	/*2.0 export addon*/
 	if (function_exists('sendit_morefields')) 
 	{
-		add_submenu_page(__FILE__, __('Fields settings', 'sendit'), __('Fields settings', 'sendit'), 8, 'sendit_fields_settings', 'SenditDynamicSettings');
+		add_submenu_page(__FILE__, __('Fields settings', 'sendit'), __('Fields settings', 'sendit'), 8, 'sendit_morefields_settings', 'SenditMoreFieldSettings');
 	}
 	else
 	{
-		add_submenu_page(__FILE__, __('Export list', 'sendit'), __('Fields settings', 'sendit'), 8, 'sendit_fields_settings', 'sendit_morefields_screen');
+		add_submenu_page(__FILE__, __('Fields list', 'sendit'), __('Fields settings', 'sendit'), 8, 'sendit_morefields_settings', 'sendit_morefields_screen');
 	}
  
 

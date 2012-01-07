@@ -43,6 +43,69 @@ function sendit_custom_post_type_init()
 
 }
 
+add_filter('post_updated_messages', 'newsletter_updated_messages');
+function newsletter_updated_messages( $messages ) {
+
+  $messages['newsletter'] = array(
+    0 => '', // Unused. Messages start at index 1.
+    1 => sprintf( __('Newsletter updated. <a href="%s">View newsletter</a>'), esc_url( get_permalink($post_ID) ) ),
+    2 => __('Custom field updated.'),
+    3 => __('Custom field deleted.'),
+    4 => __('Newsletter updated.'),
+    /* translators: %s: date and time of the revision */
+    5 => isset($_GET['revision']) ? sprintf( __('Newsletter restored to revision from %s'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+    6 => sprintf( __('Newsletter published. <a href="%s">View newsletter</a>'), esc_url( get_permalink($post_ID) ) ),
+    7 => __('Newsletter saved.'),
+    8 => sprintf( __('Newsletter submitted. <a target="_blank" href="%s">Preview newsletter</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+    9 => sprintf( __('Newsletter scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview newsletter</a>'),
+      // translators: Publish box date format, see http://php.net/date
+      date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink($post_ID) ) ),
+    10 => sprintf( __('Newsletter draft updated. <a target="_blank" href="%s">Preview newsletter</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+  );
+
+  return $messages;
+}
+
+add_filter( 'gettext', 'sendit_change_publish_button', 10, 2 );
+
+function sendit_change_publish_button( $translation, $text ) {
+if ( 'newsletter' == get_post_type())
+if ( $text == 'Publish' )
+    return 'Save or Send Newsletter';
+
+return $translation;
+}
+
+
+
+
+//display contextual help for Newsletters
+add_action( 'contextual_help', 'add_help_text', 10, 3 );
+
+function add_help_text($contextual_help, $screen_id, $screen) { 
+$contextual_help =  var_dump($screen); // use this to help determine $screen->id
+  if ('newsletter' == $screen->id ) {
+    $contextual_help =
+      '<p>' . __('Very important notices for a better use:','sendit') . '</p>' .
+      '<ul>' .
+      '<li>' . __('Insert your favorite content to send using the editor exactly in the same way you edit post, remember this content will be sent so be careful.','sendit') . '</li>' .
+      '<li>' . __('Specify the mailing list from the radio men&ugrave; at the bottom of edit','sendit') . '</li>' .
+      '</ul>' .
+      '<p>' . __('If you want to schedule immediatly the newsletter check YES:','sendit') . '</p>' .
+      '<ul>' .
+      '<li>' . __('Under the Publish module, click on the Edit link next to Publish.','sendit') . '</li>' .
+      '<li>' . __('Newsletter will be scheduled to be sent with your favorite settings.','sendit') . '</li>' .
+      '</ul>' .
+      '<p><strong>' . __('For more information:') . '</strong></p>' .
+      '<p>' . __('<a href="http://codex.wordpress.org/Posts_Edit_SubPanel" target="_blank">Edit Posts Documentation</a>','sendit') . '</p>' .
+      '<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>','sendit') . '</p>' ;
+  } elseif ( 'edit-newsletter' == $screen->id ) {
+    $contextual_help = 
+      '<p>' . __('This is the help screen displaying the table of Newsletter system.','sendit') . '</p>' ;
+  }
+  return $contextual_help;
+}
+
 
 function extract_posts()
 {
@@ -187,6 +250,76 @@ function sendit_morefields_screen()
 	</div>
 <? }
 
+add_filter("manage_edit-newsletter_columns", "newsletter_columns");
+
+function newsletter_columns($columns)
+{
+
+	global $post;
+	$columns = array(
+		"cb" => "<input type=\"checkbox\" name=\"post[]\" value=\"".$post->ID."\" />",
+		"title" => "Newsletter Title",
+		"description" => "Description",
+		"queued" => "queued",
+		"subscribers" => "subscribers",
+		"startnum" => "sent",
+		"opened" => "opened",
+		"next_send" => "Next Send",
+		"list" => "Receiver list"				
+	);
+	return $columns;
+}
+
+
+// Add to admin_init function
+add_action('manage_posts_custom_column', 'manage_newsletter_columns', 10, 2);
+
+function manage_newsletter_columns($column_name, $id) {
+	global $wpdb;
+	switch ($column_name) {
+	case 'id':
+		echo $id;
+	    break;
+
+	case 'images':
+		// Get number of images in gallery
+		$num_images = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $wpdb->posts WHERE post_parent = {$id};"));
+		echo $num_images; 
+		break;
+		
+	case 'list':
+		echo get_post_meta($id,'sendit_list',TRUE);
+		//get_queued_newsletter();
+	break;
+	
+	case 'subscribers':
+		echo get_post_meta($id,'subscribers',TRUE);
+	break;
+
+	case 'startnum':
+		echo get_post_meta($id,'startnum',TRUE);
+	break;
+
+	case 'opened':
+	/*
+		$viewed = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM ".TRACKING_TABLE." WHERE newsletter_ID = {$id};"));
+		$unique_visitors = $wpdb->get_results($wpdb->prepare("SELECT DISTINCT(reader_ID) FROM ".TRACKING_TABLE." WHERE newsletter_ID = {$id};"));
+		
+		echo 'viewed:'.$viewed. ' times by: '.count($unique_visitors).' unique readers';
+	break;
+	*/
+	
+	case 'next_send':
+	echo strftime("%d/%m/%Y/ - %H:%M ",wp_next_scheduled('sendit_five_event'));
+	//print_r(get_option('sendit_cron_ten_minutes'));
+	break;
+
+
+	
+	default:
+	break;
+	} // end switch
+}
 	
 
 
