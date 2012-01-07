@@ -275,56 +275,6 @@ function SmtpSettings()
 
 }
 
-function SenditDynamicSettings($c='')
-{
-    
-	//sendit_morefields();
-    $markup= '<div class="wrap"class="wrap">';
-    
-    $markup.='<h2>'.__('Subscription form additional fields', 'sendit').'</h2>';
-   
-    $c=md5(uniqid(rand(), true));
-    if($_POST):
-    
-
-    	$json= json_encode($_POST['sendit_field']);
-    	$arr=json_decode($json);
-
-    	
-        update_option('sendit_dynamic_settings',$json);        
-   		//echo get_option('sendit_dynamic_settings');
-        $markup.='<div id="message" class="updated fade"><p><strong>'.__('Settings saved!', 'sendit').'</strong></p></div>';
-        //$markup.='<div id="sendit_preview">'.sendit_markup(1).'</div>';
-    endif;
-
-    $markup.='<p><i>'.__('Add one or more text fields to your subscription form').'</i></p>';
-
-
-$markup.='<form method="post" action="'.$_SERVER[REQUEST_URI].'">
-
-<h3>'.__('Click add to add fields to your subscription form').'</h3>
-<form id="myForm"><ul id="sortable">';
-
-$markup.=sendit_morefields_admin();
-$markup.='</ul>';
-//$markup.=sendit_fields_counter();
-$markup.='<input type="hidden" id="id" value="'.sendit_fields_counter().'">
-
-
-<div id="divTxt">
-</div>
-<p><a class="button-primary" onClick="addFormField(); return false;">'.__('Add Field','sendit').'</a></p>';
-    
-    $markup.='<input type="submit" value="Save settings" class="button-primary sendit_actionbuttons" name="submit">';
-
-$markup.='</form><div style="width:400px;">
-<h3>Widget preview</h3>';
-$markup.= sendit_markup(1);
-$markup.= '</div></div>';
-
-    echo $markup;
-
-}
 
 function SenditWidgetSettings($c='')
 {
@@ -715,8 +665,18 @@ function gestisci_menu() {
     add_menu_page(__('Send', 'sendit'), __('Sendit', 'sendit'), 8, __FILE__, 'MainSettings');
     add_submenu_page(__FILE__, __('Manage subscribers', 'sendit'), __('Manage subscribers', 'sendit'), 8, 'lista-iscritti', 'Iscritti');
     add_submenu_page(__FILE__, __('List Options', 'sendit'), __('Lists management', 'sendit'), 8, 'lists-management', 'ManageLists');   
-    add_submenu_page(__FILE__, __('Widget settings', 'sendit'), __('Widget settings', 'sendit'), 8, 'sendit_widget_settings', 'SenditWidgetSettings');   
-    add_submenu_page(__FILE__, __('Fields settings', 'sendit'), __('Fields settings', 'sendit'), 8, 'sendit_fields_settings', 'SenditDynamicSettings');   
+    add_submenu_page(__FILE__, __('Widget settings', 'sendit'), __('Widget settings', 'sendit'), 8, 'sendit_widget_settings', 'SenditWidgetSettings');
+
+	/*2.0 export addon*/
+	if (function_exists('sendit_morefields')) 
+	{
+		add_submenu_page(__FILE__, __('Fields settings', 'sendit'), __('Fields settings', 'sendit'), 8, 'sendit_fields_settings', 'SenditDynamicSettings');
+	}
+	else
+	{
+		add_submenu_page(__FILE__, __('Export list', 'sendit'), __('Fields settings', 'sendit'), 8, 'sendit_fields_settings', 'sendit_morefields_screen');
+	}
+ 
 
     add_submenu_page(__FILE__, __('SMTP settings', 'sendit'), __('SMTP settings', 'sendit'), 8, 'sendit_smtp_settings', 'SmtpSettings');   
     //add_submenu_page(__FILE__, __('email import', 'sendit'), __('Import emails from comments', 'sendit'), 8, 'mass-import', 'Importazioni');

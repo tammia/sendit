@@ -165,73 +165,27 @@ function send_newsletter($post_ID)
 
 
 
+function export_subscribers_screen()
+{ ?>
+	<div class="wrap">
 
+	<h2><?php echo __('To export Sendit mailing list you need to buy Sendit pro exporter','sendit');?></h2>
+		<p><?php echo __('With Sendit pro export tool (available now for only 5 euros) you will be able to export and reimport as CSV files all your Sendit subscribers'); ?></p>
+		<a class="button primary" href="http://sendit.wordpressplanet.org/plugin-shop/wordpress-plugin/sendit-pro-csv-list-exporter/"><?php echo __('Buy this plugin Now for 5 euros', 'Sendit'); ?></a>
+	
+	</div>
+<? }
 
-function sendit_morefields()
-{
-     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-     	custom fields loop and form input auto generation
-     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+function sendit_morefields_screen()
+{ ?>
+	<div class="wrap">
 
-	$sendit_morefields=get_option('sendit_dynamic_settings');
-	$markup='';	
- 	$arr=json_decode($sendit_morefields);
- 	if(!empty($arr)): 	
-	 	foreach($arr as $k=>$v):
-	 		$markup.= '<p><label for="'.$v->name.'">'.$v->name.'</label>';
-	 		$markup.= '<input type="text" name="'.$v->name.'" class="'.$v->class.' '.$v->rules.'"></p>'; 		
-	 	endforeach;
- 	endif;
-	return $markup; 	
-}
-
-
-
-
-
-function sendit_morefields_admin()
-{
-     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-     	custom fields loop and form input auto generation
-     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-	$sendit_morefields=get_option('sendit_dynamic_settings');
-	$markup='';	
- 	$arr=json_decode($sendit_morefields);
- 	$i=0;
- 	
-	if(!empty($arr)): 	
- 		foreach($arr as $k=>$v):
- 			$i++;
- 			$markup.= '<li class="campo" id="campo'.$i.'">
-				<label for="sendit_field[name]['.$i.']">'.__('Field name', 'sendit').'</label><input type="text" size="20" name="sendit_field['.$i.'][name]" id="sendit_field[name]['.$i.']" value="'.$v->name.'">	
-				<label for="sendit_field[class]['.$i.']">'.__('Field css class', 'sendit').'</label><input type="text" size="20" name="sendit_field['.$i.'][class]" id="sendit_field[class]['.$i.']" value="'.$v->class.'">
-				<label for="sendit_field[rules]['.$i.']">'.__('Field rules', 'sendit').'</label><select name="sendit_field['.$i.'][rules]" id="sendit_field['.$i.'][rules]"><option value="required">required</option><option value="required">required</option></select>
-				<a class="remove_fields button-secondary">'.__('Remove','sendit').'</a></li>';
- 		endforeach;
- 	endif;
-	return $markup; 	
-}
-
-
-
-
-function sendit_fields_counter()
-{
-     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-     	return the counter of fields
-     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-	$sendit_morefields=get_option('sendit_dynamic_settings');
-	$arr=json_decode($sendit_morefields);	
-	 	$i=0;
-	if(!empty($arr)):
-	 	foreach($arr as $k=>$v):
- 			$i++;
- 		endforeach;
-	endif;
-	return $i+1;
-}
+	<h2><?php echo __('To add and manage more fields to your subscription form you need to buy Sendit More Fields');?></h2>
+		<p><?php echo __('With Sendit More Fields tool (available now for only 5 euros) you will be able to create manage and add additional fields and store as serialized data to your subscriptions. Also you can use to personalize your newsletter with something like dear {Name}'); ?></p>
+		<a class="button primary" href="http://sendit.wordpressplanet.org/plugin-shop/wordpress-plugin/sendit-more-fields/"><?php echo __('Buy this plugin Now for 5 euros', 'Sendit'); ?></a>
+	
+	</div>
+<? }
 
 	
 
