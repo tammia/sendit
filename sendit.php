@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Sendit reload!
+Plugin Name: Sendit 2
 Plugin URI: http://www.giuseppesurace.com/sendit-wp-newsletter-mailing-list/
 Description: The new version of Sendit. 
 Version: 2.0.0
