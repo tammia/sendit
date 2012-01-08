@@ -320,7 +320,39 @@ function manage_newsletter_columns($column_name, $id) {
 	break;
 	} // end switch
 }
+
 	
+	// This code is copied, from wp-includes/pluggable.php as at version 2.2.2
+	function sendit_init_smtp($phpmailer) {
+
+
+		
+		// Set the mailer type as per config above, this overrides the already called isMail method
+		if(get_option('sendit_smtp_host')!='') {
+			$phpmailer->Mailer = 'smtp';			
+			// If we're sending via SMTP, set the host
+			$phpmailer->Host = get_option('sendit_smtp_host');
+			// If we're using smtp auth, set the username & password SO WE USE AUTH
+			if (get_option('sendit_smtp_username')!='') {
+				$phpmailer->SMTPAuth = TRUE;
+				$phpmailer->SMTPSecure = 'ssl';
+				$phpmailer->Port = get_option('sendit_smtp_port'); 
+				$phpmailer->Username = get_option('sendit_smtp_username');
+				$phpmailer->Password = get_option('sendit_smtp_password');
+			}
+		}
+		
+		// You can add your own options here, see the phpmailer documentation for more info:
+		// http://phpmailer.sourceforge.net/docs/
+		
+		// Stop adding options here.
+		
+	} // End of phpmailer_init_smtp() function definition
+	
+
+
+
+add_action('phpmailer_init','sendit_init_smtp');	
 
 
 ?>

@@ -82,7 +82,7 @@ class Actions{
 						/*+++++++++++++++++++ invio email ++++++++++++++++++++++++++++++++++++++++++++*/
 						if(wp_mail($_POST['email_add'], $welcome ,$content_send, $headers, $attachments)):
 	                         //admin notification (notifica nuova iscrizione all email admin)
-	                         wp_mail($templaterow->email_lista, __('New subscriber for your newsletter: ', 'sendit').': '.$_POST['email_add'].' '.get_bloginfo('blog_name'), __('New subscriber for your newsletter: '.$_POST['email_add'], 'sendit').get_bloginfo('blog_name'));
+	                         wp_mail($templaterow->email_lista, __('New subscriber for your newsletter:', 'sendit').' '.$_POST['email_add'].' '.get_bloginfo('blog_name'), __('New subscriber for your newsletter: '.$_POST['email_add'], 'sendit').get_bloginfo('blog_name'));
 	                         die($successo);
 	                     else :
 	                         die($errore);

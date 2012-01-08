@@ -207,7 +207,7 @@ function SmtpSettings()
     </tr>
     <tr>
         <th><label for="sendit_smtp_password">SMTP password</label></th>
-        <td><input name="sendit_smtp_password" id="sendit_smtp_password" type="text" value="'.get_option('sendit_smtp_password').'" class="regular-text code" /></td>
+        <td><input name="sendit_smtp_password" id="sendit_smtp_password" type="password" value="'.get_option('sendit_smtp_password').'" class="regular-text code" /></td>
     </tr>
     <tr>
         <th><label for="sendit_smtp_ssl">SMTP SSL</label></th>

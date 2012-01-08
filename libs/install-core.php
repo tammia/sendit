@@ -6,13 +6,13 @@ require('constants.php');
 global $sendit_db_version;
 global $wpdb;
 
-$sendit_db_version = "2.0";
-
 
 
 function sendit_install() {
    global $wpdb;
    global $sendit_db_version;
+   $sendit_db_version = "2.1";
+   $installed_version = get_option('sendit_db_version');
 	/*
 	++++++++++++++++++++++++++++
 	Table: wp_nl_email
@@ -20,8 +20,10 @@ function sendit_install() {
 	*/   
    $table_email = $wpdb->prefix . "nl_email";
    $table_liste = $wpdb->prefix . "nl_liste";
+ 
+   if( $installed_version != $sendit_db_version ) {
      
-   $sql_email = "CREATE TABLE " . SENDIT_EMAIL_TABLE . " (
+   $sql_email = "CREATE TABLE " . $table_email . " (
 	  		  	id_email int(11) NOT NULL AUTO_INCREMENT,
               	id_lista  int(11) default '1',
               	contactname varchar(250) default NULL,
@@ -35,6 +37,9 @@ function sendit_install() {
                PRIMARY KEY  (`id_email`),
                            KEY `id_lista` (`id_lista`)
     );";
+     update_option("sendit_db_version", $sendit_db_version);
+  
+    }
 	/*
 	++++++++++++++++++++++++++++
 	Table: wp_nl_liste
@@ -55,7 +60,6 @@ function sendit_install() {
    
    
     
-   add_option("sendit_db_version", $sendit_db_version);
 
    $init_html='<!-- Start Sendit Subscription form -->
      <div class="sendit">
