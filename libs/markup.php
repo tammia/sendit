@@ -18,8 +18,13 @@ function sendit_markup($id)
 
 	$sendit_markup=get_option('sendit_markup');	
  	$sendit_markup=str_replace("{list_id}",$id, $sendit_markup);
- 	$sendit_markup=str_replace("{sendit_morefields}",sendit_morefields(), $sendit_markup);
-
+ 	
+ 	if(function_exists('sendit_morefields')):
+ 		$sendit_markup=str_replace("{sendit_morefields}",sendit_morefields(), $sendit_markup);
+	else:
+ 		$sendit_markup=str_replace("{sendit_morefields}",'', $sendit_markup);
+	endif;
+			
  	$sendit_markup=str_replace("{subscribe_text}", get_option('sendit_subscribe_button_text'), $sendit_markup);
  	if(is_user_logged_in()):
 		$sendit_markup.='<small><a href="wp-admin/admin.php?page=sendit_widget_settings">'.__('Customize Widget','sendit').'</a></small>';

@@ -70,7 +70,7 @@ add_filter( 'gettext', 'sendit_change_publish_button', 10, 2 );
 
 function sendit_change_publish_button( $translation, $text ) {
 if ( 'newsletter' == get_post_type())
-if ( $text == 'Publish' )
+if ( $text == 'Publish' || $text == 'Update')
     return 'Save or Send Newsletter';
 
 return $translation;
