@@ -127,3 +127,8 @@ Author URI: http://www.mis-algoritmos.com
 #sortable {
     list-style-type: none;
 }
+
+
+.senditmessage{border: 1px solid;margin: 5px 0px;padding:5px;}
+.jobrunning{color: #9F6000;background-color: #FEEFB3;}
+.jobdone{color: #4F8A10; background-color: #DFF2BF;}

@@ -46,16 +46,26 @@ function sendit_custom_post_type_init()
 
 add_filter('post_updated_messages', 'newsletter_updated_messages');
 function newsletter_updated_messages( $messages ) {
+	global $_POST;
+
+	if($_POST['send_now']==1):
+		$msgok=__('Newsletter Sent Now','sendit');
+	elseif($_POST['send_now']==2):
+		$msgok=__('Newsletter Scheduled it will be sent automatically','sendit');
+	else:
+		$msgok=__('Newsletter Saved succesfully','sendit');		
+	endif;
 
   $messages['newsletter'] = array(
     0 => '', // Unused. Messages start at index 1.
-    1 => sprintf( __('Newsletter updated. <a href="%s">View newsletter</a>'), esc_url( get_permalink($post_ID) ) ),
+    1 => $msgok,
     2 => __('Custom field updated.'),
     3 => __('Custom field deleted.'),
     4 => __('Newsletter updated.'),
     /* translators: %s: date and time of the revision */
     5 => isset($_GET['revision']) ? sprintf( __('Newsletter restored to revision from %s'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-    6 => sprintf( __('Newsletter published. <a href="%s">View newsletter</a>'), esc_url( get_permalink($post_ID) ) ),
+    6 => $msgok,
+    //6 => sprintf( __('Newsletter published. <a href="%s">View newsletter</a>'), esc_url( get_permalink($post_ID) ) ),
     7 => __('Newsletter saved.'),
     8 => sprintf( __('Newsletter submitted. <a target="_blank" href="%s">Preview newsletter</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
     9 => sprintf( __('Newsletter scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview newsletter</a>'),
@@ -131,16 +141,38 @@ function sendit_custom_box($post) {
 	$sendit = new Actions();
 	global $wpdb;
 	$choosed_list = get_post_meta($post->ID, 'sendit_list', TRUE);
-	echo $choosed_list;
+	//echo $choosed_list;
 	$table_email =  SENDIT_EMAIL_TABLE;   
 	$table_liste =  SENDIT_LIST_TABLE;   
     $liste = $wpdb->get_results("SELECT id_lista, nomelista FROM $table_liste ");
 	echo '<label for="send_now">'.__('Action', 'sendit').': </label>';
-	echo '<select name="send_now" id="send_now">
-			<option value="0">'.__( 'Save and send later', 'sendit' ).'</option><option value="1">'.__( 'Send now', 'sendit' ).'</option>';
+	
+	if(get_post_meta($post->ID, 'send_now', TRUE)=='2'):
+		echo '<div class="jobrunning senditmessage"><h5>'.__('Warning newsletter is currently running the job','sendit').'</h5></div>';
+	elseif(get_post_meta($post->ID, 'send_now', TRUE)=='4'):
+		echo '<div class="jobdone senditmessage"><h5>'.__('Newsletter already Sent','sendit').'</h5></div>';
+	else:
+		
+	endif;	
+	
+	echo '<select name="send_now" id="send_now">';
+	
+	if(function_exists('Sendit_tracker_installation')):
+		if(get_post_meta($post->ID, 'send_now', TRUE)==2){ $selected=' selected="selected" ';} else { $selected='';}
+		echo '<option value="2" '.$selected.'>'.__( 'Schedule with Sendit Pro', 'sendit' ).'</option>';
+	endif;
+		if(get_post_meta($post->ID, 'send_now', TRUE)==1){ $selected=' selected="selected" ';} else { $selected='';}
+		echo '<option value="1" '.$selected.'>'.__( 'Send now', 'sendit' ).'</option>';	
 
-	
-	
+		if(get_post_meta($post->ID, 'send_now', TRUE)==0){ $selected=' selected="selected" ';} else { $selected='';}
+		echo '<option value="0" '.$selected.'>'.__( 'Save and send later', 'sendit' ).'</option>';
+		
+		if(get_post_meta($post->ID, 'send_now', TRUE)==4){ $selected=' selected="selected" ';} else { $selected='';}
+		echo '<option value="4" '.$selected.'>'.__( 'Sent with Sendit pro', 'sendit' ).'</option>';	
+		
+		if(get_post_meta($post->ID, 'send_now', TRUE)==5){ $selected=' selected="selected" ';} else { $selected='';}
+		echo '<option value="4" '.$selected.'>'.__( 'Sent with Sendit free', 'sendit' ).'</option>';
+				
 	echo '</select><br />';
 	echo '<h4>'.__('Select List', 'sendit').'</h4>';
 	foreach($liste as $lista): 
@@ -150,12 +182,7 @@ function sendit_custom_box($post) {
 
 
 	<input type="hidden" name="sendit_noncename" id="sendit_noncename" value="<?php echo wp_create_nonce( 'sendit_noncename'.$post->ID );?>" />
-	<?php	$is_scheduled = get_post_meta($post->ID, 'sendit_scheduled', TRUE); ?>
-	<h4>Schedule this newsletter with Sendit Pro and track visits?</h4>
-	<p><label for "sendit_scheduled"><?php __('Prepare to send:','sendit')?></p>
-	<input type="radio" name="sendit_scheduled" value="0" <?php if ($is_scheduled == 0) echo "checked=1";?>> No<br/>
-	<input type="radio" name="sendit_scheduled" value="1" <?php if ($is_scheduled == 1) echo "checked=1";?>> Yes<br/>
-
+	
 	<?php
 }
 
@@ -235,13 +262,25 @@ function send_newsletter($post_ID)
 	/*+++++++++++++++++++ CONTENT EMAIL +++++++++++++++++++++++++++++++++++++++++*/
 	$title = $article->post_title;
 	$content = apply_filters('the_content',$article->post_content);
+
+	
 	$newsletter_content=$header.$content.$footer;
 	$readonline = get_permalink($post_ID);
 
 	if($send_now==1):
 		foreach($subscribers as $subscriber):
-			wp_mail($subscriber->email, $title ,$newsletter_content, $headers, $attachments);		
+			//aggiungo messaggio con il link di cancelazione che cicla il magic_string..
+			$delete_link="
+			<center>
+	 		-------------------------------------------------------------------------------
+			<p>".__('To unsubscribe, please click on the link below', 'sendit')."<br />
+			<a href=\"".WP_PLUGIN_URL.'/sendit/'."delete.php?action=delete&c=".$subscriber->magic_string."\">".__('Unsubscribe now', 'sendit')."</a></p>
+			</center>";
+		
+			wp_mail($subscriber->email, $title ,$newsletter_content.$delete_link, $headers, $attachments);		
 		endforeach;
+		//set to 5 status : sent with classic plugin
+		update_post_meta($post_ID, 'send_now', '5');	
 	endif;
 }
 
@@ -308,6 +347,14 @@ function senditfree_manage_newsletter_columns($column_name, $id) {
 		Buy the extension
 		*/
 		echo $buymsg;
+		} else {
+				if(get_post_meta($id, 'send_now', TRUE)=='2'):
+					echo '<div class="jobrunning senditmessage"><p>'.__('Warning! newsletter is currently running the job','sendit').'</p></div>';
+				elseif(get_post_meta($id, 'send_now', TRUE)=='4'):
+					echo '<div class="jobdone senditmessage"><p>'.__('Newsletter Sent','sendit').'</p></div>';
+			else:
+		
+			endif;
 		}
 	break;
 		
@@ -355,10 +402,20 @@ function senditfree_manage_newsletter_columns($column_name, $id) {
 			echo $buymsg;
 		}
 		else
-		{	$unique_visitors = $wpdb->get_results($wpdb->prepare("SELECT DISTINCT(reader_ID) FROM ".TRACKING_TABLE." WHERE newsletter_ID = {$id};"));		
-			echo 'viewed:'.$viewed. ' times by: '.count($unique_visitors).' unique readers';
+		{	
+			//status 5 inviate con invio normale
+			if(get_post_meta($id,'send_now',TRUE)==5):
+				echo '<small>'.__('Sent traditionally without tracker','sendit').'</small>';		
+			else:
+				$viewed = $wpdb->get_var($wpdb->prepare("SELECT count(reader_ID) FROM ".TRACKING_TABLE." WHERE newsletter_ID = {$id};"));
+				$unique_visitors = $wpdb->get_results($wpdb->prepare("SELECT DISTINCT(reader_ID) FROM ".TRACKING_TABLE." WHERE newsletter_ID = {$id};"));		
+			echo '<small>'.__('Opened:','sendit').' '.$viewed. ' '.__('times','sendit').'<br />by: '.count($unique_visitors).' readers</small>';
+			
+
+			
+
+			endif;
 		}
-		
 		
 	break;	
 	
@@ -373,8 +430,9 @@ function senditfree_manage_newsletter_columns($column_name, $id) {
 		}
 		else
 		{
-		
-			echo strftime("%d/%m/%Y/ - %H:%M ",wp_next_scheduled('sendit_five_event'));
+			if(get_post_meta($id, 'send_now', TRUE)==2):
+				echo strftime("%d/%m/%Y/ - %H:%M ",wp_next_scheduled('sendit_five_event'));
+			endif;
 		}
 		
 	break;

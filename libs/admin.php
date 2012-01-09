@@ -357,7 +357,7 @@ function MainSettings($c='')
 			  	<a href="'.admin_url( 'admin.php?page=sendit_widget_settings').'" class="button-primary">'.__('Customize widget', 'sendit').'</a>
 			  </div>
 			  <div class="sendit_box_sendnewsletter sendit_box_menu"><h2>'.__('Send Newsletter', 'sendit').'</h2>
-			  	<a href="#" class="button-primary">'.__('Create and send newsletter', 'sendit').'</a>
+			  	<a href="'.admin_url( 'post-new.php?post_type=newsletter').'" class="button-primary">'.__('Create and send newsletter', 'sendit').'</a>
 			  </div>';
 
 	$markup.='<!-- start payment extensions --><div class="sendit_box_fields sendit_box_menu"><h2>'.__('Add more fields', 'sendit').'</h2>
@@ -368,7 +368,7 @@ function MainSettings($c='')
 			  	<a href="'.admin_url('admin.php?page=export-subscribers').'" class="button-primary">'.__('Save your list as CSV', 'sendit').'</a>
 			  </div>
 			  <div class="sendit_box_cron sendit_box_menu"><h2>'.__('Cron Settings', 'sendit').'</h2>
-			  	<a href="#" class="button-primary">'.__('Cron settings', 'sendit').'</a>
+			  	<a href="'.admin_url('admin.php?page=cron-settings').'" class="button-primary">'.__('Cron settings', 'sendit').'</a>
 			  </div>';	
 
 
