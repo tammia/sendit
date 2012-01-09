@@ -23,7 +23,7 @@ function sendit_install() {
  
    if( $installed_version != $sendit_db_version ) {
      
-   $sql_email = "CREATE TABLE " . $table_email . " (
+   $sql_email = "CREATE TABLE " . SENDIT_EMAIL_TABLE . " (
 	  		  	id_email int(11) NOT NULL AUTO_INCREMENT,
               	id_lista  int(11) default '1',
               	contactname varchar(250) default NULL,
