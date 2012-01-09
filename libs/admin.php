@@ -342,7 +342,7 @@ function MainSettings($c='')
 {
     
 	
-    $markup= '<div class="wrap"class="wrap"><h2>'.__('Sendit Main settings', 'sendit').'</h2>';
+    $markup= '<div class="wrap"class="wrap"><h2>'.__('Sendit', 'sendit').'</h2>';
     //$markup.='<label>Preview Area</label><div class="preview"></div>';
     $c=md5(uniqid(rand(), true));
     if($_POST):
@@ -360,14 +360,15 @@ function MainSettings($c='')
 			  	<a href="#" class="button-primary">'.__('Create and send newsletter', 'sendit').'</a>
 			  </div>';
 
-	$markup.='<div class="sendit_box_list sendit_box_menu"><h2>'.__('Manage Lists', 'sendit').'</h2>
-			  	<a href="#" class="button-primary">'.__('Create and manage lists', 'sendit').'</a>
+	$markup.='<!-- start payment extensions --><div class="sendit_box_fields sendit_box_menu"><h2>'.__('Add more fields', 'sendit').'</h2>
+			  	<a href="'.admin_url( 'admin.php?page=sendit_morefields_settings').'" class="button-primary">'.__('Add more fields', 'sendit').'</a>
+			  </div>';
+			  
+	$markup.='<div class="sendit_box_export sendit_box_menu"><h2>'.__('Export mailing lists', 'sendit').'</h2>
+			  	<a href="'.admin_url('admin.php?page=export-subscribers').'" class="button-primary">'.__('Save your list as CSV', 'sendit').'</a>
 			  </div>
-			  <div class="sendit_box_design sendit_box_menu"><h2>'.__('Design Widget', 'sendit').'</h2>
-			  	<a href="#" class="button-primary">'.__('Customize widget', 'sendit').'</a>
-			  </div>
-			  <div class="sendit_box_sendnewsletter sendit_box_menu"><h2>'.__('Send Newsletter', 'sendit').'</h2>
-			  	<a href="#" class="button-primary">'.__('Create and send newsletter', 'sendit').'</a>
+			  <div class="sendit_box_cron sendit_box_menu"><h2>'.__('Cron Settings', 'sendit').'</h2>
+			  	<a href="#" class="button-primary">'.__('Cron settings', 'sendit').'</a>
 			  </div>';	
 
 
@@ -678,10 +679,11 @@ function gestisci_menu() {
 	}
  
 
-    add_submenu_page(__FILE__, __('SMTP settings', 'sendit'), __('SMTP settings', 'sendit'), 8, 'sendit_smtp_settings', 'SmtpSettings');   
-    //add_submenu_page(__FILE__, __('email import', 'sendit'), __('Import emails from comments', 'sendit'), 8, 'mass-import', 'Importazioni');
-    //add_submenu_page(__FILE__, __('email import', 'sendit'), __('Import emails from WP Users', 'sendit'), 8, 'import', 'ImportWpUsers');
- 
+    add_submenu_page(__FILE__, __('SMTP settings', 'sendit'), __('SMTP settings', 'sendit'), 8, 'sendit_smtp_settings', 'SmtpSettings');  
+    /* 
+    add_submenu_page(__FILE__, __('email import', 'sendit'), __('Import emails from comments', 'sendit'), 8, 'mass-import', 'Importazioni');
+    add_submenu_page(__FILE__, __('email import', 'sendit'), __('Import emails from WP Users', 'sendit'), 8, 'import', 'ImportWpUsers');
+ */
  
 	if ($wpdb->get_var("show tables like 'bb_press'") != '') :
 		add_submenu_page(__FILE__, __('email import', 'sendit'), __('Import emails from BBpress', 'sendit'), 8, 'import-bb-users', 'ImportBbPress');

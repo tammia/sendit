@@ -8,11 +8,20 @@
 .sendit_box_sendnewsletter{
     background: url("images/sendnewsletter.png") no-repeat scroll 50% 0;
 }
+.sendit_box_fields{
+    background: url("images/morefields.png") no-repeat scroll 50% 0;
+}
+.sendit_box_export{
+    background: url("images/export.png") no-repeat scroll 50% 0;
+}
+.sendit_box_cron{
+    background: url("images/cron.png") no-repeat scroll 50% 0;
+}
 
 .sendit_box_menu{
     display: block;
     text-align: center;
-    height: 300px;
+    height: 200px;
     width:30%;
     float:left;
     border-radius:5px;
@@ -21,11 +30,10 @@
 }
 
 .sendit_box_menu h2{
-padding-bottom: 200px;
+padding-bottom: 120px;
 color: #FF6600;
 }
 .sendit_actionbuttons{
-font-size:130% !important;
 padding:15px !important;
 width:200px !important;
 margin-left: 50%;
@@ -34,8 +42,7 @@ display:block;
 }
 
 .sendit_box_menu a{
-font-size:130% !important;
-padding:15px;
+padding:10px;
 width:200px !important;
 display:block;
 margin:0 auto;

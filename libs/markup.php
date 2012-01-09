@@ -1,6 +1,4 @@
 <?php
-
-
 function sendit_shortcode($atts) {
      $markup=sendit_markup($atts[id]);    
      return $markup;
