@@ -13,481 +13,722 @@ msgstr ""
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
 "X-Poedit-Basepath: \n"
 "X-Poedit-Bookmarks: \n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes"
 
-#: sendit.php:78
-#: sendit.php:107
-#: sendit.php:138
-#@ sendit
-msgid "Subscribe"
-msgstr "Iscriviti"
-
-#: sendit.php:161
+#: libs/markup.php:134
 #@ sendit
 msgid "Newsletter title: "
 msgstr "Titolo Newsletter"
 
-#: sendit.php:163
+#: libs/markup.php:136
 #@ sendit
 msgid "Mailing list ID: "
 msgstr "ID mailing list:"
 
-#: sendit.php:313
-#: sendit.php:1073
+#: libs/admin.php:666
 #@ sendit
 msgid "Send"
 msgstr "Invia"
 
-#: sendit.php:313
-#@ sendit
-msgid "Newsletter"
-msgstr "Newsletter"
-
-#: sendit.php:315
+#: libs/admin.php:667
 #@ sendit
 msgid "Manage subscribers"
 msgstr "Gestisci iscritti"
 
-#: sendit.php:319
-#: sendit.php:544
-#@ sendit
-msgid "Options"
-msgstr "Opzioni"
-
-#: sendit.php:321
-#: sendit.php:324
-#: sendit.php:328
+#: libs/admin.php:689
 #@ sendit
 msgid "email import"
 msgstr "Importazione email"
 
-#: sendit.php:321
-#@ sendit
-msgid "Import emails from comments"
-msgstr "Importa email dai commenti"
-
-#: sendit.php:497
+#: libs/admin.php:53
 #@ sendit
 msgid "Mailing list updated"
 msgstr "Mailing list aggiornata"
 
-#: sendit.php:562
+#: libs/admin.php:100
 #@ sendit
 msgid "Available lists"
 msgstr "Liste disponibili"
 
-#: sendit.php:576
+#: libs/admin.php:116
 #@ sendit
 msgid "Edit"
 msgstr "Modifica"
 
-#: sendit.php:586
+#: libs/admin.php:126
 #@ sendit
 msgid "Newsletter options"
 msgstr "Opzioni Newsletter"
 
-#: sendit.php:590
+#: libs/admin.php:130
 #@ sendit
 msgid "from email"
 msgstr "Email mittente"
 
-#: sendit.php:593
+#: libs/admin.php:134
 #@ sendit
 msgid "Newsletter name"
 msgstr "Nome della Newsletter"
 
-#: sendit.php:598
+#: libs/admin.php:139
 #@ sendit
 msgid "Template"
 msgstr "Template"
 
-#: sendit.php:599
+#: libs/admin.php:140
 #@ sendit
 msgid "Header and Footer (XHTML code)"
 msgstr "Header e Footer (XHTML code)"
 
-#: sendit.php:605
+#: libs/admin.php:143
 #@ sendit
 msgid "Header"
 msgstr "Header"
 
-#: sendit.php:608
+#: libs/admin.php:145
 #@ sendit
 msgid "Footer"
 msgstr "Footer"
 
-#: sendit.php:613
+#: libs/admin.php:148
 #@ sendit
 msgid "Save"
 msgstr "Salva"
 
-#: sendit.php:883
+#: libs/admin.php:359
 #@ sendit
 msgid "Send Newsletter"
 msgstr "Invia Newsletter"
 
-#: sendit.php:1033
-#@ sendit
-msgid "Select a post (if you want to send it by email)"
-msgstr "Seleziona un post (se vuoi inviarlo via mail)"
-
-#: sendit.php:480
+#: libs/admin.php:46
 #@ sendit
 msgid "Mailing list created succesfully!"
 msgstr "Mailing list creata con successo!"
 
-#: sendit.php:502
+#: libs/admin.php:55
 #@ sendit
 msgid "email@here"
 msgstr "indirizzoemail@mittente"
 
-#: sendit.php:503
+#: libs/admin.php:56
 #@ sendit
 msgid "New mailing list"
 msgstr "Nuova mailing list"
 
-#: sendit.php:507
+#: libs/admin.php:58
 #@ sendit
 msgid "Mailing created successfully!"
 msgstr "Mailing list creata con successo!"
 
-#: sendit.php:568
+#: libs/admin.php:96
 #@ sendit
 msgid "Create new list"
 msgstr "Crea Nuova lista"
 
-#: sendit.php:575
+#: libs/admin.php:115
 #@ sendit
 msgid "Mailing list"
 msgstr "Mailing list"
 
-#: sendit.php:1058
-#@ sendit
-msgid "Please select a mailing list"
-msgstr "Seleziona mailing list"
-
-#: sendit.php:1066
-#@ sendit
-msgid "Subject"
-msgstr "Oggetto"
-
-#: sendit.php:1203
-#@ sendit
-msgid "Mailing list management"
-msgstr "Gestione mailing list"
-
-#: sendit.php:715
-#: sendit.php:802
-#@ sendit
-msgid "Select list"
-msgstr "Seleziona mailing list"
-
-#: sendit.php:1229
+#: libs/admin.php:522
 #@ sendit
 msgid "Manual Subscribe mailing list "
 msgstr "Iscrizione manuale"
 
-#: sendit.php:1232
+#: libs/admin.php:532
 #@ sendit
 msgid "Copy here one or more email address"
 msgstr "Copia qui uno o piu' indirizzi email:"
 
-#: sendit.php:1233
+#: libs/admin.php:524
 #@ sendit
 msgid "email address (one or more: default separator= line break)"
 msgstr "indirizzi email (uno per riga in caso di inserimento multiplo)"
 
-#: sendit.php:1239
+#: libs/admin.php:540
 #@ sendit
 msgid "Add"
 msgstr "Aggiungi"
 
-#: sendit.php:1244
+#: libs/admin.php:485
+#: libs/admin.php:551
 #@ sendit
 msgid "Subscribers"
 msgstr "Iscritti"
 
-#: sendit.php:1270
+#: libs/admin.php:562
+#: libs/admin.php:644
 #@ sendit
 msgid "email"
 msgstr "email"
 
-#: sendit.php:1280
+#: libs/admin.php:616
 #@ sendit
 msgid "Confirmed"
 msgstr "Confermato"
 
-#: sendit.php:1288
+#: libs/admin.php:624
 #@ sendit
 msgid "Cancelled"
 msgstr "Cancellato"
 
-#: sendit.php:1292
+#: libs/admin.php:631
 #@ sendit
 msgid "Update"
 msgstr "Modifica"
 
-#: sendit.php:577
-#: sendit.php:1294
+#: libs/admin.php:117
+#: libs/admin.php:632
 #@ sendit
 msgid "Delete"
 msgstr "Cancella"
 
-#: confirmation.php:45
+#: libs/actions.php:128
 #@ sendit
 msgid "Thank you for subscribe our newsletter!"
 msgstr "Grazie per esserti iscritto alla newsletter!"
 
-#: confirmation.php:45
+#: libs/actions.php:128
 #@ sendit
 msgid "you will be updated"
 msgstr "Sarete aggiornati"
 
-#: delete.php:21
-#@ sendit
-msgid "email addresso not present or something is going wrong?!"
-msgstr "email non presente o qualcosa non sta funzionando?!"
-
-#: delete.php:44
-#@ sendit
-msgid "Your email address was deleted suffesfully from our mailing list!"
-msgstr "Il tuo indirizzo email è stato rimosso dalla nostra mailing list!"
-
-#: submit.php:17
+#: libs/actions.php:18
 #@ sendit
 msgid "not valid email address"
 msgstr "indirizzo email non valido"
 
-#: submit.php:31
+#: libs/actions.php:39
 #@ sendit
 msgid "email address already present"
 msgstr "indirizzo email gia presente"
 
-#: submit.php:54
+#: libs/actions.php:73
 #@ sendit
 msgid "Welcome to newsletter by: "
 msgstr "Benvenuti alla newsletter da:"
 
-#: submit.php:56
+#: libs/actions.php:75
 #@ sendit
 msgid "To confirm your subscription please follow this link"
 msgstr "Per confermare la tua iscrizione, segui il seguente link"
 
-#: submit.php:57
+#: libs/actions.php:76
 #@ sendit
 msgid "Confirm here"
 msgstr "Conferma qui"
 
-#: submit.php:94
-#: submit.php:109
-#@ sendit
-msgid "New subscriber for your newsletter: "
-msgstr "Nuovo iscritto per la tua newsletter: "
-
-#: submit.php:111
-msgid " subscribe to your mailing list:   "
-msgstr "iscrizione alla mailing list:"
-
-#: sendit.php:516
+#: libs/admin.php:61
 #@ sendit
 msgid "Mailing deleted successfully!"
 msgstr "mailing cancellata con successo"
 
-#: sendit.php:533
+#: libs/admin.php:71
 #, php-format
 #@ sendit
 msgid "Are You sure to delete %d list? it will delete all mailing list and subscribers data "
 msgstr "Sei sicuro di voler cancellare la lista  %? Cancellerai tutti i dati e gli iscritti!"
 
-#: sendit.php:635
-#@ sendit
-msgid "Import email from comments (wp_comments)"
-msgstr "Importa email dai commenti (wp_comments)"
-
-#: sendit.php:639
-#@ sendit
-msgid "Click on Import button to start. All comments email will be added to your mailing list ID 1"
-msgstr "Clicca su importa per iniziare con l'importazione. Tutte le email dei commenti si aggiungeranno alla lista con ID 1 (lista principale)"
-
-#: sendit.php:639
-#: sendit.php:712
-#: sendit.php:799
-#@ sendit
-msgid "(email address already presents will not be added)"
-msgstr "(gli indirizzi email gia presenti non saranno aggiunti)"
-
-#: sendit.php:640
-#: sendit.php:713
-#: sendit.php:800
-#@ sendit
-msgid "Import"
-msgstr "Importa"
-
-#: sendit.php:671
-#: sendit.php:757
-#: sendit.php:846
-#: sendit.php:1154
+#: libs/admin.php:436
 #, php-format
 #@ sendit
 msgid "email %s already present"
 msgstr "email %s gia presente"
 
-#: sendit.php:676
-#: sendit.php:762
-#: sendit.php:851
-#, php-format
-#@ sendit
-msgid "email %s succesfully added"
-msgstr "email %s aggiunta con successo"
-
-#: sendit.php:1113
+#: libs/admin.php:395
 #@ sendit
 msgid "Email deleted succesfully!"
 msgstr "email cancellata!"
 
-#: sendit.php:1124
+#: libs/admin.php:406
 #, php-format
 #@ sendit
 msgid "email %s edited succesfully"
 msgstr "email %s modificata con successo!"
 
-#: sendit.php:1159
+#: libs/admin.php:441
 #, php-format
 #@ sendit
 msgid "email %s added succesfully!"
 msgstr "email %s aggiunta con successo!"
 
-#: sendit.php:1284
+#: libs/admin.php:620
 #@ sendit
 msgid "Not confirmed"
 msgstr "Non confermato"
 
-#: sendit.php:279
+#: libs/install-core.php:183
+#@ default
 msgid "Newsletter sent by Sendit Wordpress plugin"
 msgstr "Newsletter inviata con Sendit plugin Wordpress"
 
-#: sendit.php:317
+#: libs/admin.php:682
 #@ sendit
 msgid "SMTP settings"
-msgstr ""
+msgstr "Impostazioni SMTP"
 
-#: sendit.php:324
-#@ sendit
-msgid "Import emails from WP Users"
-msgstr "Importa email dagli autori"
-
-#: sendit.php:328
+#: libs/admin.php:689
 #@ sendit
 msgid "Import emails from BBpress"
 msgstr "Importa email da BBpress"
 
-#: sendit.php:345
+#: libs/admin.php:166
 #@ sendit
 msgid "Sendit SMTP settings"
-msgstr ""
+msgstr "Impostazioni SMTP Sendit"
 
-#: sendit.php:363
+#: libs/admin.php:184
+#: libs/admin.php:293
 #@ sendit
 msgid "Settings saved!"
 msgstr "Impostazioni salvate"
 
-#: sendit.php:365
+#: libs/admin.php:186
 #@ sendit
 msgid "Smtp settings are required only if you want to send mail using an SMTP server"
 msgstr "I Seguenti settings sono necessari solo se utilizzate un server SMTP (se il server SMTP non richiede autenticazione lasciate i campi vuoti)"
 
-#: sendit.php:366
+#: libs/admin.php:187
+#@ default
 msgid "By default Sendit will send newsletter using the mail() function, if you sant to send mail using SMTP server you just have to type your settings here"
 msgstr "Sendit utilizza come default, la funziona mail() di php, se utilizzate un server SMTP configurate le opzioni qui"
 
-#: sendit.php:380
+#: libs/admin.php:201
 #@ sendit
 msgid "Settings below are required only if SMTP server require authentication"
 msgstr "Le impostazioni seguenti sono necessarie solo se il server SMTP richiede autenticazione"
 
-#: sendit.php:447
+#: libs/admin.php:268
+#: libs/admin.php:330
 #@ sendit
 msgid "Save settings"
 msgstr "Salva impostazioni"
 
-#: sendit.php:708
-#@ sendit
-msgid "Import email from Authors (wp_users)"
-msgstr "Importa email dagli autori (wp_users)"
-
-#: sendit.php:712
-#: sendit.php:799
-#@ sendit
-msgid "Click on Import button to start. All Authors email will be added to your mailing list ID 1"
-msgstr ""
-
-#: sendit.php:795
-#@ sendit
-msgid "Import email from BBpress Users (bb_users)"
-msgstr "Importa email da BBpress"
-
-#: sendit.php:1050
-#@ sendit
-msgid "Get content"
-msgstr "Estrai il contenuto"
-
-#: sendit.php:645
-#: sendit.php:731
-#: sendit.php:818
-#: sendit.php:1078
-#@ sendit
-msgid "Do you think Sendit it\\'s useful? Please send a donation to support our development and i really appreciate!"
-msgstr "Pensi sia utile Sendit? Fai una donazione utilizzando Paypal!"
-
-#: sendit.php:884
-#@ sendit
-msgid ""
-"Sendit needs support! Make a donation NOW!<br />\n"
-"\tnew version with new features is coming: cron-jobs / batch and queue emails / new user interface!"
-msgstr "Sendit ha bisogno del tuo supporto! fai una donazione per sostenere lo sviluppo del plugin"
-
-#: sendit.php:973
-#@ sendit
-msgid "To unsubscribe, please click on the link below"
-msgstr "Per cancellare la tua iscrizione clicca il link sottostante"
-
-#: sendit.php:974
-#@ sendit
-msgid "Unsubscribe now"
-msgstr "Cancella la tua iscrizione ora"
-
-#: submit.php:15
+#: libs/actions.php:13
 #@ sendit
 msgid "Subscription completed now Check your email and confirm"
 msgstr "Iscrizione completata con successo controlla la tua email e conferma"
 
-#: sendit.php:404
+#: libs/admin.php:225
 #@ sendit
 msgid "These settings are useful if you want to send email blocks and stop for some seconds"
 msgstr "Queste impostazioni servono nel caso in cui vogliate inviare blocchi di email e fermare lo script per X secondi"
 
-#: sendit.php:983
-#@ sendit
-msgid " Error sending email!"
-msgstr "Errore invio email"
-
-#: sendit.php:997
-#, php-format
-#@ sendit
-msgid "Sendit will restart to send newsletters in %s seconds"
-msgstr "Sendit: l'invio riprenderà in %s secondi "
-
-#: sendit.php:1244
+#: libs/admin.php:551
 #@ sendit
 msgid "Subscriptions confirmed"
 msgstr "iscritti confermati"
 
-#: sendit.php:319
+#: libs/admin.php:668
 #@ sendit
 msgid "Lists management"
 msgstr "Gestione mailing lists"
+
+#: libs/actions.php:85
+#@ sendit
+msgid "New subscriber for your newsletter:"
+msgstr "Nuova iscrizione per la tua newsletter:"
+
+#: libs/actions.php:85
+#@ sendit
+msgid "New subscriber for your newsletter: email_add"
+msgstr ""
+
+#: libs/actions.php:112
+#@ sendit
+msgid "Indirizzo email non presente o qualcosa non sta funzionando!"
+msgstr ""
+
+#: libs/admin.php:17
+#@ sendit
+msgid "Field name"
+msgstr "Nome campo"
+
+#: libs/admin.php:17
+#@ sendit
+msgid "Field css class"
+msgstr "stile css"
+
+#: libs/admin.php:17
+#@ sendit
+msgid "Field rules"
+msgstr "Regole campo"
+
+#: libs/admin.php:79
+#@ sendit
+msgid "Lists Management"
+msgstr "Gestione liste"
+
+#: libs/admin.php:285
+#@ sendit
+msgid "Sendit Widget CSS/html settings"
+msgstr "Impostazioni Widget html / Css"
+
+#: libs/admin.php:297
+#@ default
+msgid "Welcome to the new Sendit Newsletter plugin Panel"
+msgstr ""
+
+#: libs/admin.php:308
+#@ sendit
+msgid "Response mode"
+msgstr "Tipo di risposta"
+
+#: libs/admin.php:318
+#@ sendit
+msgid "Select format for your posts to send"
+msgstr "Seleziona il formato con cui mandare i post"
+
+#: libs/admin.php:345
+#: libs/admin.php:666
+#@ sendit
+msgid "Sendit"
+msgstr "Sendit"
+
+#: libs/admin.php:353
+#@ sendit
+msgid "Lists and Template"
+msgstr "Liste e template"
+
+#: libs/admin.php:354
+#@ sendit
+msgid "Create and manage lists"
+msgstr "Crea e gestisci mailing list"
+
+#: libs/admin.php:356
+#@ sendit
+msgid "Design Widget"
+msgstr "Diesgna widget"
+
+#: libs/admin.php:357
+#@ sendit
+msgid "Customize widget"
+msgstr "Personalizza widget"
+
+#: libs/admin.php:360
+#@ sendit
+msgid "Create and send newsletter"
+msgstr "Crea e invia newsletter"
+
+#: libs/admin.php:363
+#: libs/admin.php:364
+#@ sendit
+msgid "Add more fields"
+msgstr "Aggiungi campi"
+
+#: libs/admin.php:367
+#@ sendit
+msgid "Export mailing lists"
+msgstr "Esporta mailing list"
+
+#: libs/admin.php:368
+#@ sendit
+msgid "Save your list as CSV"
+msgstr "Salva in CSV le tue mailing list"
+
+#: libs/admin.php:370
+#: libs/admin.php:693
+#@ sendit
+msgid "Cron Settings"
+msgstr "Impostazioni cron"
+
+#: libs/admin.php:371
+#@ sendit
+msgid "Cron settings"
+msgstr "Impostazioni cron"
+
+#: libs/admin.php:500
+#@ sendit
+msgid "id"
+msgstr ""
+
+#: libs/admin.php:501
+#@ sendit
+msgid "mailing list"
+msgstr "mailing list"
+
+#: libs/admin.php:502
+#: libs/admin.php:565
+#: libs/admin.php:646
+#@ sendit
+msgid "actions"
+msgstr "azioni"
+
+#: libs/admin.php:530
+#@ sendit
+msgid "Subscription"
+msgstr "iscrizione"
+
+#: libs/admin.php:563
+#: libs/admin.php:645
+#@ sendit
+msgid "status"
+msgstr "stato"
+
+#: libs/admin.php:564
+#@ sendit
+msgid "Additional info"
+msgstr "Informazioni aggiuntive"
+
+#: libs/admin.php:668
+#@ sendit
+msgid "List Options"
+msgstr "Opzioni Liste"
+
+#: libs/admin.php:669
+#@ sendit
+msgid "Widget settings"
+msgstr "Impostazioni Widget"
+
+#: libs/admin.php:674
+#: libs/admin.php:678
+#@ sendit
+msgid "Fields settings"
+msgstr "Impostazioni campi"
+
+#: libs/admin.php:678
+#@ sendit
+msgid "Fields list"
+msgstr "Lista dei campi"
+
+#: libs/admin.php:693
+#@ sendit
+msgid "cron settings"
+msgstr ""
+
+#: libs/admin.php:699
+#: libs/admin.php:703
+#@ sendit
+msgid "Export list"
+msgstr ""
+
+#: libs/extensions-handler.php:10
+#@ default
+msgctxt "post type general name"
+msgid "Newsletters"
+msgstr ""
+
+#: libs/extensions-handler.php:11
+#@ default
+msgctxt "post type singular name"
+msgid "Newsletter"
+msgstr ""
+
+#: libs/extensions-handler.php:12
+#@ default
+msgctxt "newsletter"
+msgid "Add New"
+msgstr ""
+
+#: libs/extensions-handler.php:13
+#@ default
+msgid "Add New newsletter"
+msgstr ""
+
+#: libs/extensions-handler.php:14
+#@ default
+msgid "Edit newsletter"
+msgstr ""
+
+#: libs/extensions-handler.php:15
+#@ default
+msgid "New newsletter"
+msgstr ""
+
+#: libs/extensions-handler.php:16
+#@ default
+msgid "View newsletter"
+msgstr ""
+
+#: libs/extensions-handler.php:17
+#@ default
+msgid "Search newsletter"
+msgstr ""
+
+#: libs/extensions-handler.php:18
+#@ default
+msgid "No newsletters found"
+msgstr ""
+
+#: libs/extensions-handler.php:19
+#@ default
+msgid "No newsletters found in Trash"
+msgstr ""
+
+#: libs/extensions-handler.php:51
+#, php-format
+#@ default
+msgid "Newsletter updated. <a href=\"%s\">View newsletter</a>"
+msgstr ""
+
+#: libs/extensions-handler.php:52
+#@ default
+msgid "Custom field updated."
+msgstr ""
+
+#: libs/extensions-handler.php:53
+#@ default
+msgid "Custom field deleted."
+msgstr ""
+
+#: libs/extensions-handler.php:54
+#@ default
+msgid "Newsletter updated."
+msgstr ""
+
+#. translators: %s: date and time of the revision
+#: libs/extensions-handler.php:56
+#, php-format
+#@ default
+msgid "Newsletter restored to revision from %s"
+msgstr ""
+
+#: libs/extensions-handler.php:57
+#, php-format
+#@ default
+msgid "Newsletter published. <a href=\"%s\">View newsletter</a>"
+msgstr ""
+
+#: libs/extensions-handler.php:58
+#@ default
+msgid "Newsletter saved."
+msgstr ""
+
+#: libs/extensions-handler.php:59
+#, php-format
+#@ default
+msgid "Newsletter submitted. <a target=\"_blank\" href=\"%s\">Preview newsletter</a>"
+msgstr ""
+
+#: libs/extensions-handler.php:60
+#, php-format
+#@ default
+msgid "Newsletter scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Preview newsletter</a>"
+msgstr ""
+
+#: libs/extensions-handler.php:62
+#@ default
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: libs/extensions-handler.php:63
+#, php-format
+#@ default
+msgid "Newsletter draft updated. <a target=\"_blank\" href=\"%s\">Preview newsletter</a>"
+msgstr ""
+
+#: libs/extensions-handler.php:89
+#@ sendit
+msgid "Very important notices for a better use:"
+msgstr ""
+
+#: libs/extensions-handler.php:91
+#@ sendit
+msgid "Insert your favorite content to send using the editor exactly in the same way you edit post, remember this content will be sent so be careful."
+msgstr ""
+
+#: libs/extensions-handler.php:92
+#@ sendit
+msgid "Specify the mailing list from the radio men&ugrave; at the bottom of edit"
+msgstr ""
+
+#: libs/extensions-handler.php:94
+#@ sendit
+msgid "If you want to schedule immediatly the newsletter check YES:"
+msgstr ""
+
+#: libs/extensions-handler.php:96
+#@ sendit
+msgid "Under the Publish module, click on the Edit link next to Publish."
+msgstr ""
+
+#: libs/extensions-handler.php:97
+#@ sendit
+msgid "Newsletter will be scheduled to be sent with your favorite settings."
+msgstr ""
+
+#: libs/extensions-handler.php:99
+#@ default
+msgid "For more information:"
+msgstr ""
+
+#: libs/extensions-handler.php:100
+#@ sendit
+msgid "<a href=\"http://codex.wordpress.org/Posts_Edit_SubPanel\" target=\"_blank\">Edit Posts Documentation</a>"
+msgstr ""
+
+#: libs/extensions-handler.php:101
+#@ sendit
+msgid "<a href=\"http://wordpress.org/support/\" target=\"_blank\">Support Forums</a>"
+msgstr ""
+
+#: libs/extensions-handler.php:104
+#@ sendit
+msgid "This is the help screen displaying the table of Newsletter system."
+msgstr ""
+
+#: libs/extensions-handler.php:120
+#@ sendit
+msgid "Append content from existing posts"
+msgstr ""
+
+#: libs/extensions-handler.php:122
+#@ sendit
+msgid "Save and Send"
+msgstr ""
+
+#: libs/extensions-handler.php:136
+#@ sendit
+msgid "Action"
+msgstr ""
+
+#: libs/extensions-handler.php:137
+#@ sendit
+msgid "Save and send later"
+msgstr ""
+
+#: libs/extensions-handler.php:137
+#@ sendit
+msgid "Send now"
+msgstr ""
+
+#: libs/extensions-handler.php:138
+#@ sendit
+msgid "Select List"
+msgstr ""
+
+#: libs/extensions-handler.php:235
+#@ sendit
+msgid "To export Sendit mailing list you need to buy Sendit pro exporter"
+msgstr ""
+
+#: libs/extensions-handler.php:236
+#@ default
+msgid "With Sendit pro export tool (available now for only 5 euros) you will be able to export and reimport as CSV files all your Sendit subscribers"
+msgstr ""
+
+#: libs/extensions-handler.php:237
+#: libs/extensions-handler.php:248
+#@ Sendit
+msgid "Buy this plugin Now for 5 euros"
+msgstr ""
+
+#: libs/extensions-handler.php:246
+#@ default
+msgid "To add and manage more fields to your subscription form you need to buy Sendit More Fields"
+msgstr ""
+
+#: libs/extensions-handler.php:247
+#@ default
+msgid "With Sendit More Fields tool (available now for only 5 euros) you will be able to create manage and add additional fields and store as serialized data to your subscriptions. Also you can use to personalize your newsletter with something like dear {Name}"
+msgstr ""
+
+#: libs/markup.php:28
+#@ sendit
+msgid "Customize Widget"
+msgstr ""
 
