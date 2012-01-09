@@ -5,7 +5,8 @@ function sendit_custom_post_type_init()
 {
 	/***************************************************
 	+++ custom post type: newsletter extract from Sendit Pro
-	***************************************************/	
+	***************************************************/
+
   $labels = array(
     'name' => _x('Newsletters', 'post type general name'),
     'singular_name' => _x('Newsletter', 'post type singular name'),
@@ -83,7 +84,7 @@ return $translation;
 add_action( 'contextual_help', 'add_help_text', 10, 3 );
 
 function add_help_text($contextual_help, $screen_id, $screen) { 
-$contextual_help =  var_dump($screen); // use this to help determine $screen->id
+$contextual_help =  ''; //var_dump($screen); // use this to help determine $screen->id
   if ('newsletter' == $screen->id ) {
     $contextual_help =
       '<p>' . __('Very important notices for a better use:','sendit') . '</p>' .
@@ -121,6 +122,7 @@ function sendit_add_custom_box()
 		          'sendit_content_box', 'newsletter', 'advanced','high' );
     add_meta_box( 'mailinglist_choice', __( 'Save and Send', 'sendit' ), 
                 'sendit_custom_box', 'newsletter', 'advanced' );
+
    } 
 }
 
@@ -129,12 +131,17 @@ function sendit_custom_box($post) {
 	$sendit = new Actions();
 	global $wpdb;
 	$choosed_list = get_post_meta($post->ID, 'sendit_list', TRUE);
-
+	echo $choosed_list;
 	$table_email =  SENDIT_EMAIL_TABLE;   
 	$table_liste =  SENDIT_LIST_TABLE;   
     $liste = $wpdb->get_results("SELECT id_lista, nomelista FROM $table_liste ");
 	echo '<label for="send_now">'.__('Action', 'sendit').': </label>';
-	echo '<select name="send_now" id="send_now"><option value="0">'.__( 'Save and send later', 'sendit' ).'</option><option value="1">'.__( 'Send now', 'sendit' ).'</option></select><br />';
+	echo '<select name="send_now" id="send_now">
+			<option value="0">'.__( 'Save and send later', 'sendit' ).'</option><option value="1">'.__( 'Send now', 'sendit' ).'</option>';
+
+	
+	
+	echo '</select><br />';
 	echo '<h4>'.__('Select List', 'sendit').'</h4>';
 	foreach($liste as $lista): 
 		$subscribers=count($sendit->GetSubscribers($lista->id_lista));?>
@@ -143,6 +150,11 @@ function sendit_custom_box($post) {
 
 
 	<input type="hidden" name="sendit_noncename" id="sendit_noncename" value="<?php echo wp_create_nonce( 'sendit_noncename'.$post->ID );?>" />
+	<?php	$is_scheduled = get_post_meta($post->ID, 'sendit_scheduled', TRUE); ?>
+	<h4>Schedule this newsletter with Sendit Pro and track visits?</h4>
+	<p><label for "sendit_scheduled"><?php __('Prepare to send:','sendit')?></p>
+	<input type="radio" name="sendit_scheduled" value="0" <?php if ($is_scheduled == 0) echo "checked=1";?>> No<br/>
+	<input type="radio" name="sendit_scheduled" value="1" <?php if ($is_scheduled == 1) echo "checked=1";?>> Yes<br/>
 
 	<?php
 }
@@ -169,9 +181,11 @@ function sendit_content_box($post) {
 	<?php
 }
 
+add_action('save_post', 'sendit_save_postdata');
+
 function sendit_save_postdata( $post_id )
 {
- 
+ 	//print_r($_POST);
 	if ( !wp_verify_nonce( $_POST['sendit_noncename'], 'sendit_noncename'.$post_id ))
 		return $post_id;
  
@@ -185,8 +199,13 @@ function sendit_save_postdata( $post_id )
 	if ($post->post_type == 'newsletter') {
 		update_post_meta($post_id, 'send_now', $_POST['send_now']);	
 		update_post_meta($post_id, 'sendit_list', $_POST['sendit_list']);
-		//update_post_meta($post_id, 'subscribers', get_list_subcribers($_POST['sendit_list']));
-		//update_post_meta($post_id, 'sendit_scheduled',$_POST['sendit_scheduled']);
+		//save scheduler data if exixts
+		if(function_exists('Sendit_tracker_installation'))
+		{
+			update_post_meta($post_id, 'subscribers', get_list_subcribers($_POST['sendit_list']));
+			update_post_meta($post_id, 'sendit_scheduled',$_POST['sendit_scheduled']);
+		}
+
 		return(esc_attr($_POST));
 	}
 }
@@ -250,21 +269,20 @@ function sendit_morefields_screen()
 	</div>
 <? }
 
-add_filter("manage_edit-newsletter_columns", "newsletter_columns");
+add_filter("manage_edit-newsletter_columns", "senditfree_newsletter_columns");
 
-function newsletter_columns($columns)
+function senditfree_newsletter_columns($columns)
 {
 
 	global $post;
 	$columns = array(
 		"cb" => "<input type=\"checkbox\" name=\"post[]\" value=\"".$post->ID."\" />",
 		"title" => "Newsletter Title",
-		"description" => "Description",
 		"queued" => "queued",
 		"subscribers" => "subscribers",
 		"startnum" => "sent",
 		"opened" => "opened",
-		"next_send" => "Next Send",
+		"next_send" => "Next Job",
 		"list" => "Receiver list"				
 	);
 	return $columns;
@@ -272,24 +290,41 @@ function newsletter_columns($columns)
 
 
 // Add to admin_init function
-add_action('manage_posts_custom_column', 'manage_newsletter_columns', 10, 2);
+add_action('manage_posts_custom_column', 'senditfree_manage_newsletter_columns', 10, 2);
 
-function manage_newsletter_columns($column_name, $id) {
+function senditfree_manage_newsletter_columns($column_name, $id) {
 	global $wpdb;
+	$buymsg='<small>'.__('To use this feature You need to buy Sendit Pro plugin', 'sendit').'</small><br />';
+	$buymsg.= '<a href="http://sendit.wordpressplanet.org/plugin-shop/wordpress-plugin/sendit-pro-scheduler/">Buy now</a>';
 	switch ($column_name) {
 	case 'id':
 		echo $id;
 	    break;
 
-	case 'images':
-		// Get number of images in gallery
-		$num_images = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $wpdb->posts WHERE post_parent = {$id};"));
-		echo $num_images; 
-		break;
+	case 'queued':
+		if(!function_exists('Sendit_tracker_installation'))
+		{
+		/*
+		Buy the extension
+		*/
+		echo $buymsg;
+		}
+	break;
 		
 	case 'list':
-		echo get_post_meta($id,'sendit_list',TRUE);
-		//get_queued_newsletter();
+		echo 'List id: '. get_post_meta($id,'sendit_list',TRUE);
+		if(!function_exists('Sendit_tracker_installation'))
+		{
+			/*
+			Buy the extension
+			*/
+			//echo $buymsg;
+		} 
+		else
+		{ 
+			get_queued_newsletter();
+		}
+	
 	break;
 	
 	case 'subscribers':
@@ -297,22 +332,53 @@ function manage_newsletter_columns($column_name, $id) {
 	break;
 
 	case 'startnum':
-		echo get_post_meta($id,'startnum',TRUE);
+		if(!function_exists('Sendit_tracker_installation'))
+		{
+		/*
+		Buy the extension
+		*/
+			echo $buymsg;
+		} 
+		else
+		{
+			echo get_post_meta($id,'startnum',TRUE);
+		}
+				
 	break;
 
 	case 'opened':
-	/*
-		$viewed = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM ".TRACKING_TABLE." WHERE newsletter_ID = {$id};"));
-		$unique_visitors = $wpdb->get_results($wpdb->prepare("SELECT DISTINCT(reader_ID) FROM ".TRACKING_TABLE." WHERE newsletter_ID = {$id};"));
+		if(!function_exists('Sendit_tracker_installation'))
+		{
+			/*
+			Buy the extension
+			*/
+			echo $buymsg;
+		}
+		else
+		{	$unique_visitors = $wpdb->get_results($wpdb->prepare("SELECT DISTINCT(reader_ID) FROM ".TRACKING_TABLE." WHERE newsletter_ID = {$id};"));		
+			echo 'viewed:'.$viewed. ' times by: '.count($unique_visitors).' unique readers';
+		}
 		
-		echo 'viewed:'.$viewed. ' times by: '.count($unique_visitors).' unique readers';
-	break;
-	*/
+		
+	break;	
 	
+		
 	case 'next_send':
-	echo strftime("%d/%m/%Y/ - %H:%M ",wp_next_scheduled('sendit_five_event'));
-	//print_r(get_option('sendit_cron_ten_minutes'));
+		if(!function_exists('Sendit_tracker_installation'))
+		{
+			/*
+			Buy the extension
+			*/
+			echo $buymsg;
+		}
+		else
+		{
+		
+			echo strftime("%d/%m/%Y/ - %H:%M ",wp_next_scheduled('sendit_five_event'));
+		}
+		
 	break;
+
 
 
 	

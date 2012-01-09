@@ -402,7 +402,7 @@ msgstr "Crea e gestisci mailing list"
 #: libs/admin.php:356
 #@ sendit
 msgid "Design Widget"
-msgstr "Diesgna widget"
+msgstr "Disegna widget"
 
 #: libs/admin.php:357
 #@ sendit
