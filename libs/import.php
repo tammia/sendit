@@ -22,10 +22,10 @@ MASS IMPORT da wp_users
 
     echo"<form action='$_SERVER[REQUEST_URI]' method='post' name='importform' id='importform'>
         <table>
-            <tr><th scope=\"row\" width=\"600\" align=\"left\">".__('Click on Import button to start. All Authors email will be added to your mailing list ID 1', 'sendit')."<small><br />".__('(email address already presents will not be added)', 'sendit')."</small></label><th>";
-               echo "<td><input type=\"submit\" name=\"start\" value=\"".__('Import', 'sendit')."\" ></td></tr>
+            <tr><th scope=\"row\" width=\"600\" align=\"left\">".__('Select destination list and click on Import button to start. All email will be added to your mailing list', 'sendit')."<small><br />".__('(email address already presents will not be added)', 'sendit')."</small></label><th>";
+               echo "<td></td></tr>
             <tr>
-                <td>".__('Select list', 'sendit')."
+                <td>".__('Select Destination list', 'sendit')."
                 <select name='list_id'>";
                 
                 foreach ($liste as $lista) {
@@ -34,7 +34,7 @@ MASS IMPORT da wp_users
                     
                 }
                     
-                echo "</select>
+                echo "</select><input class=\"button-primary\" type=\"submit\" name=\"start\" value=\"".__('Import', 'sendit')."\" >
                 </td>
             </tr>
             
@@ -108,7 +108,7 @@ MASS IMPORT da wp_comments
 
     echo"<form action='$_SERVER[REQUEST_URI]' method='post' name='importform' id='importform'>
         <table>
-            <tr><th scope=\"row\" width=\"600\" align=\"left\">".__('Click on Import button to start. All Authors email will be added to your mailing list ID 1', 'sendit')."<small><br />".__('(email address already presents will not be added)', 'sendit')."</small></label><th>";
+            <tr><th scope=\"row\" width=\"600\" align=\"left\">".__('Click on Import button to start. All comments authors email will be added to your mailing list selected', 'sendit')."<small><br />".__('(email address already presents will not be added)', 'sendit')."</small></label><th>";
                echo "<td></td></tr>
             <tr>
                 <td>".__('Select Destination list', 'sendit')."
