@@ -13,7 +13,7 @@ include_once plugin_dir_path( __FILE__ ).'/libs/markup.php';
 include_once plugin_dir_path( __FILE__ ).'/libs/actions.php';
 include_once plugin_dir_path( __FILE__ ).'/libs/admin.php';
 include_once plugin_dir_path( __FILE__ ).'/libs/extensions-handler.php';
-
+include_once plugin_dir_path( __FILE__ ).'/libs/import.php';
 
 load_plugin_textdomain('sendit', false, basename(dirname(__FILE__)) . '/languages'); //thanks to Davide http://www.jqueryitalia.org
 
