@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/!svn/ver/487879/sendit/trunk/libs
+END
+extensions-handler.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/487303/sendit/trunk/libs/extensions-handler.php
+END
+import.php
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/!svn/ver/487303/sendit/trunk/libs/import.php
+END
+constants.php
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/!svn/ver/487303/sendit/trunk/libs/constants.php
+END
+install-core.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/487658/sendit/trunk/libs/install-core.php
+END
+pagination.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/487303/sendit/trunk/libs/pagination.class.php
+END
+markup.php
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/!svn/ver/487303/sendit/trunk/libs/markup.php
+END
+actions.php
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/!svn/ver/487303/sendit/trunk/libs/actions.php
+END
+admin.php
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/!svn/ver/487879/sendit/trunk/libs/admin.php
+END
