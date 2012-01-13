@@ -1,13 +1,13 @@
 K 25
 svn:wc:ra_dav:version-url
 V 34
-/!svn/ver/487879/sendit/trunk/libs
+/!svn/ver/489614/sendit/trunk/libs
 END
 extensions-handler.php
 K 25
 svn:wc:ra_dav:version-url
 V 57
-/!svn/ver/487303/sendit/trunk/libs/extensions-handler.php
+/!svn/ver/488819/sendit/trunk/libs/extensions-handler.php
 END
 import.php
 K 25
@@ -19,13 +19,13 @@ constants.php
 K 25
 svn:wc:ra_dav:version-url
 V 48
-/!svn/ver/487303/sendit/trunk/libs/constants.php
+/!svn/ver/489449/sendit/trunk/libs/constants.php
 END
 install-core.php
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/!svn/ver/487658/sendit/trunk/libs/install-core.php
+/!svn/ver/489440/sendit/trunk/libs/install-core.php
 END
 pagination.class.php
 K 25
@@ -49,5 +49,5 @@ admin.php
 K 25
 svn:wc:ra_dav:version-url
 V 44
-/!svn/ver/487879/sendit/trunk/libs/admin.php
+/!svn/ver/489625/sendit/trunk/libs/admin.php
 END

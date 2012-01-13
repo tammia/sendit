@@ -200,12 +200,8 @@ function sendit_content_box($post) {
     	</div>
     </div>
 
-	<?php endforeach; ?>
-
-
-	<input type="hidden" name="sendit_noncename" id="sendit_noncename" value="<?php echo wp_create_nonce( 'sendit_noncename'.$post->ID );?>" />
-
-	<?php
+	<?php endforeach; 
+	
 }
 
 add_action('save_post', 'sendit_save_postdata');
@@ -269,14 +265,19 @@ function send_newsletter($post_ID)
 
 	if($send_now==1):
 		foreach($subscribers as $subscriber):
-			//aggiungo messaggio con il link di cancelazione che cicla il magic_string..
-			$delete_link="
-			<center>
-	 		-------------------------------------------------------------------------------
-			<p>".__('To unsubscribe, please click on the link below', 'sendit')."<br />
-			<a href=\"".WP_PLUGIN_URL.'/sendit/'."delete.php?action=delete&c=".$subscriber->magic_string."\">".__('Unsubscribe now', 'sendit')."</a></p>
-			</center>";
-		
+			if(get_option('sendit_unsubscribe_link')=='y'):
+			
+				//aggiungo messaggio con il link di cancelazione che cicla il magic_string..
+				$delete_link="
+				<center>
+	 			-------------------------------------------------------------------------------
+				<p>".__('To unsubscribe, please click on the link below', 'sendit')."<br />
+				<a href=\"".WP_PLUGIN_URL.'/sendit/'."delete.php?action=delete&c=".$subscriber->magic_string."\">".__('Unsubscribe now', 'sendit')."</a></p>
+				</center>";
+			else:
+				$delete_link='';
+			endif;
+			//send the newsletter!		
 			wp_mail($subscriber->email, $title ,$newsletter_content.$delete_link, $headers, $attachments);		
 		endforeach;
 		//set to 5 status : sent with classic plugin
@@ -303,7 +304,12 @@ function sendit_morefields_screen()
 
 	<h2><?php echo __('To add and manage more fields to your subscription form you need to buy Sendit More Fields');?></h2>
 		<p><?php echo __('With Sendit More Fields tool (available now for only 5 euros) you will be able to create manage and add additional fields and store as serialized data to your subscriptions. Also you can use to personalize your newsletter with something like dear {Name}'); ?></p>
-		<a class="button primary" href="http://sendit.wordpressplanet.org/plugin-shop/wordpress-plugin/sendit-more-fields/"><?php echo __('Buy this plugin Now for 5 euros', 'Sendit'); ?></a>
+		<h4><?php echo __('This video show you how much easy is to add fields to your subscription form with Sendit More Fields','sendit'); ?></h4>
+		<iframe src="http://player.vimeo.com/video/34833902?title=0&amp;byline=0&amp;portrait=0" width="601" height="338" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+		<h4>Take a look to Sendit Plugins shop</h4>
+		<a class="button-primary sendit-actions" href="http://sendit.wordpressplanet.org/plugin-shop/wordpress-plugin/sendit-more-fields/">
+		<br />
+		<?php echo __('Buy this plugin Now for 5 euros', 'Sendit'); ?></a>
 	
 	</div>
 <? }

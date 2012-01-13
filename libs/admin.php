@@ -251,20 +251,24 @@ $markup.='<br />Best<br />Giuseppe</i>
 }
 
 
-function SenditWidgetSettings($c='')
+function SenditMainSettings($c='')
 {
     
 	
     $markup= '<div class="wrap"class="wrap">';
     
-    $markup.='<h2>'.__('Sendit Widget CSS/html settings', 'sendit').'</h2>';
+    $markup.='<h2>'.__('Sendit General settings', 'sendit').'</h2>';
    
     $c=md5(uniqid(rand(), true));
     if($_POST):
         update_option('sendit_subscribe_button_text',stripslashes($_POST['sendit_subscribe_button_text']));        
         update_option('sendit_response_mode',stripslashes($_POST['sendit_response_mode']));        
         update_option('sendit_markup',stripslashes($_POST['sendit_markup']));        
-        update_option('sendit_css',stripslashes($_POST['sendit_css']));        
+        update_option('sendit_css',stripslashes($_POST['sendit_css']));
+        update_option('sendit_unsubscribe_link',stripslashes($_POST['sendit_unsubscribe_link']));
+        update_option('sendit_gravatar',stripslashes($_POST['sendit_gravatar']));
+        
+                
         $markup.='<div id="message" class="updated fade"><p><strong>'.__('Settings saved!', 'sendit').'</strong></p></div>';
         //$markup.='<div id="sendit_preview">'.sendit_markup(1).'</div>';
     endif;
@@ -279,7 +283,27 @@ function SenditWidgetSettings($c='')
         <th><label for="sendit_subscribe_button_text">Subscribtion button text</label></th>
         <td><input type="text" name="sendit_subscribe_button_text" id="sendit_subscribe_button_text" value="'.get_option('sendit_subscribe_button_text').'" /></td>
     </tr>
+    <tr>
+        <th><label for="sendit_unsubscribe_link">Show unsubscribe link on footer?</label></th>
+        <td>
+        	<select name="sendit_unsubscribe_link">
+        		<option value="'.get_option('sendit_unsubscribe_link').'" selected="selected">'.get_option('sendit_unsubscribe_link').'</option>
+        		<option value="no">no</option>
+        		<option value="yes">yes</option>
+        	</select> <small>(If not be sure you have an option to unsubscribe)</small>        	
+        </td>
+    </tr>
         <tr>
+        <th><label for="sendit_gravatar">Show gravatar on subscriber list</label></th>
+        <td>
+        	<select name="sendit_gravatar">
+        		<option value="'.get_option('sendit_gravatar').'" selected="selected">'.get_option('sendit_gravatar').'</option>
+        		<option value="no">no</option>
+        		<option value="yes">yes</option>
+        	</select>        	
+        </td>
+    </tr>
+    <tr>
         <th><label for="sendit_response_mode">'.__('Response mode', 'sendit').'</label></th>
         <td>
         	<select name="sendit_response_mode">
@@ -287,10 +311,10 @@ function SenditWidgetSettings($c='')
         		<option value="alert">Alert</option>
         		<option value="ajax">Ajax</option>
         	</select>
-</td>
+		</td>
     </tr>
     <tr>
-        <th><label for="sendit_markup">'.__('Select format for your posts to send', 'sendit').'</label></th>
+        <th><label for="sendit_markup">'.__('Subscription form Html markup', 'sendit').'</label></th>
         <td><textarea class="sendit_code source" rows="15" cols="70" name="sendit_markup" id="sendit_markup">'.get_option('sendit_markup').'</textarea></td>
     </tr>
     <tr>
@@ -328,8 +352,8 @@ function MainSettings($c='')
 	$markup.='<div class="sendit_box_list sendit_box_menu"><h2>'.__('Lists and Template', 'sendit').'</h2>
 			  	<a href="'.admin_url( 'admin.php?page=lists-management').'" class="button-primary">'.__('Create and manage lists', 'sendit').'</a>
 			  </div>
-			  <div class="sendit_box_design sendit_box_menu"><h2>'.__('Design Widget', 'sendit').'</h2>
-			  	<a href="'.admin_url( 'admin.php?page=sendit_widget_settings').'" class="button-primary">'.__('Customize widget', 'sendit').'</a>
+			  <div class="sendit_box_design sendit_box_menu"><h2>'.__('Main Settings', 'sendit').'</h2>
+			  	<a href="'.admin_url( 'admin.php?page=sendit_general_settings').'" class="button-primary">'.__('Main Settings', 'sendit').'</a>
 			  </div>
 			  <div class="sendit_box_sendnewsletter sendit_box_menu"><h2>'.__('Send Newsletter', 'sendit').'</h2>
 			  	<a href="'.admin_url( 'post-new.php?post_type=newsletter').'" class="button-primary">'.__('Create and send newsletter', 'sendit').'</a>
@@ -533,13 +557,14 @@ function Iscritti() {
         <br clear=\"all\" />
 			<table class=\"widefat post fixed\">
 				<thead>
-					<tr>
-						<th style=\"width:30px !important;\"></th>
-						<th>".__('email', 'sendit')."</th>
+					<tr>";
+					if(get_option('sendit_gravatar')=='yes'):
+						echo "<th style=\"width:30px !important;\"></th>";
+				    endif;
+				   echo "<th>".__('email', 'sendit')."</th>
 						<th>".__('status', 'sendit')."</th>
 						<th>".__('Additional info', 'sendit')."</th>
 						<th>".__('actions', 'sendit')."</th>
-
 					</tr>
 				</thead>
     	
@@ -572,9 +597,12 @@ function Iscritti() {
         
              
         echo "<tr>	
-        		<form action=\"#email_".$email->id_email."\" method=\"post\">
-				<td class=\"grav\" style=\"width:30px !important;\">".get_avatar($email->email,'24')."</td>
-                <td id=\"email_".$email->id_email."\">
+        		<form action=\"#email_".$email->id_email."\" method=\"post\">";
+				if(get_option('sendit_gravatar')=='yes'):
+					echo "<td class=\"grav\" style=\"width:30px !important;\">".get_avatar($email->email,'24')."</td>";
+				endif;
+                
+                echo "<td id=\"email_".$email->id_email."\">
                    
                         <!--input type=\"checkbox\" name=\"email_handler[]\" value=\"".$email->id_email."\">-->
                         <input type=\"hidden\" name=\"id_email\" value=\"".$email->id_email."\">
@@ -616,9 +644,12 @@ function Iscritti() {
     
     
     echo "		<tfoot>
-					<tr>
-						<th style=\"width:30px !important;\"></th>
-						<th>".__('email', 'sendit')."</th>
+					<tr>";
+					
+				if(get_option('sendit_gravatar')=='yes'):
+					echo "<th style=\"width:30px !important;\"></th>";
+				endif;
+					echo "<th>".__('email', 'sendit')."</th>
 						<th>".__('status', 'sendit')."</th>
 						<th>".__('Additional info', 'sendit')."</th>
 						<th>".__('actions', 'sendit')."</th>
@@ -643,7 +674,7 @@ function gestisci_menu() {
     add_menu_page(__('Send', 'sendit'), __('Sendit', 'sendit'), 8, __FILE__, 'MainSettings');
     add_submenu_page(__FILE__, __('Manage subscribers', 'sendit'), __('Manage subscribers', 'sendit'), 8, 'lista-iscritti', 'Iscritti');
     add_submenu_page(__FILE__, __('List Options', 'sendit'), __('Lists management', 'sendit'), 8, 'lists-management', 'ManageLists');   
-    add_submenu_page(__FILE__, __('Widget settings', 'sendit'), __('Widget settings', 'sendit'), 8, 'sendit_widget_settings', 'SenditWidgetSettings');
+    add_submenu_page(__FILE__, __('Main settings', 'sendit'), __('Main settings', 'sendit'), 8, 'sendit_general_settings', 'SenditMainSettings');
 
 	/*2.0 export addon*/
 	if (function_exists('sendit_morefields')) 
@@ -681,7 +712,14 @@ function gestisci_menu() {
 	{
 		add_submenu_page(__FILE__, __('Export list', 'sendit'), __('Export list', 'sendit'), 8, 'export-subscribers', 'export_subscribers_screen');
 	}
-
+	
+	/*version check*/
+   $sendit_db_version = SENDIT_DB_VERSION;
+   $installed_version = get_option('sendit_db_version');
+   if($sendit_db_version!=$installed_version)
+   {
+   	 add_submenu_page(__FILE__, __('Upgrade Sendit', 'sendit'), __('Sendit upgrade', 'sendit'), 8, 'update-sendit', 'sendit_install');
+   }
     
     
 
